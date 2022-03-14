@@ -4,34 +4,31 @@ import Card from './Card';
 const { faker } = require('@faker-js/faker');
 
 function App() {
-  const [name, setName] = useState('Alan Smith');
+  const [cards, setCards] = useState([
+    {
+      name: "Damaris Schuster",
+      title: "International Operations Producer",
+      avatar: 'http://images2.fanpop.com/image/photos/8600000/random-animals-animals-8675984-377-442.jpg'
+    },
+    {
+      name: "Bartholome Dietrich",
+      title: "Future Security Developer",
+      avatar: "https://aot-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg"
+    }
+  ])
   const [showCard, setShowCard] = useState(true);
-
-  const buttonsMarkup = (
-    <div>
-      <button className='button button2'>YES</button>
-      <button className='button button3'>NO</button>
-    </div>
-  );
-
-  const changeNameHandler = name => setName(name);
-
-  const changeInputHandler = event => setName(event.target.value);
-
   const toggleShowCard = () => setShowCard(!showCard);
 
   return (
     <div className='App'>
       <button className='button' onClick={toggleShowCard}>Toggle show/hide</button>
       {showCard &&
-        <Card
-          avatar="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/127.jpg"
-          name={name}
-          title="Back End Developer"
-          onChangeName={() => changeNameHandler('Michael Chan')}
-          onChangeInput={changeInputHandler}
-        >{buttonsMarkup}
-        </Card>
+        cards.map(card => 
+          <Card
+            avatar={card.avatar}
+            name={card.name}
+            title={card.title}
+          />)
       }
     </div>
   );
